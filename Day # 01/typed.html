@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing effect | Nouman.DEV</title>
+    <style>
+        /* LInking Kumbh Sans and Oswlad font fmaily from Google Fonts */
+        @import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Oswald:wght@600&display=swap");
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Oswald", sans-serif;
+        }
+
+        body{
+            display: flex;
+            height: 100vh;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #typed-output{
+            color: rgb(191, 0, 255);
+            text-shadow: 3px 3px 10px  rgba(191, 0, 255, 0.477);
+        }
+
+        h1{
+            font-size: 2rem;
+        }
+
+        img{
+            margin-top: 0.5rem;
+            width: 2rem;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+   <h1>
+        <img src="brand-logo.png" alt="Brand">Nouman.DEV, Full Stack Web developer in <span id="typed-output"></span>
+   </h1>
+
+    <!-- Linking Typed Js CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.js"
+        integrity="sha512-tQQXRDB2wEmuJGtFrmmoFYzNTq8StA1XJrfO0OQbbTxd9G0CwaTDL6/C1y805IlvBVrMwOqob1kf6r/2U5XXVg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        // For Typed Output
+        const typed = new Typed('#typed-output', {
+            strings: ["React.js", "Tailwind.css", "Node.js", "Next.js", "Express.js", "Mongo DB", "PHP", "javaScript"],
+            typeSpeed: 20,
+            backSpeed: 30,
+            backDelay: 1500,
+            loop: true
+        });
+    </script>
+</body>
+
+</html>
