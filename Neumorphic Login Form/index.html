@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Neumorphic Login Form</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: "Kumbh Sans", sans-serif;
+        }
+
+        body {
+            background-color: #e0e5ec;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .neumorphic-card {
+            background: #e0e5ec;
+            border-radius: 20px;
+            box-shadow: 20px 20px 60px #a3b1c6, -20px -20px 60px #ffffff;
+            padding: 1rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 320px;
+            text-align: center;
+        }
+
+        .neumorphic-card h1 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .neumorphic-input {
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border: none;
+            border-radius: 20px;
+            background: #e0e5ec;
+            box-shadow: 10px 10px 20px #a3b1c6, -10px -10px 20px #ffffff;
+            font-size: 16px;
+            color: #333;
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .neumorphic-input::placeholder {
+            color: #aaa;
+        }
+
+        .neumorphic-input:focus {
+            transition: box-shadow 0.3s ease;
+            box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+        }
+
+        .neumorphic-button {
+            width: 50%;
+            padding: 15px 0;
+            border: none;
+            border-radius: 20px;
+            background: #e0e5ec;
+            box-shadow: 10px 10px 20px #a3b1c6, -10px -10px 20px #ffffff;
+            font-size: 18px;
+            color: #333;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .neumorphic-button:hover {
+            box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+        }
+
+        .neumorphic-button:active{
+            box-shadow:inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="neumorphic-card">
+        <h1>Login Box</h1>
+        <input type="text" class="neumorphic-input" placeholder="Username" required>
+        <input type="password" class="neumorphic-input" placeholder="Password" required>
+        <button class="neumorphic-button">Sign In </button>
+    </div>
+
+</body>
+
+</html>
