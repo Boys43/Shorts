@@ -1,0 +1,14 @@
+.grid {
+  display: grid;
+  grid-auto-columns: 8rem;
+  grid-auto-flow: column;
+  gap: 10px;
+  padding: 10px;
+  animation: animate 10s linear infinite;
+}
+
+@keyframes animate {
+  to {
+    translate: calc(-5 * 8rem);
+  }
+}

@@ -1,0 +1,8 @@
+img{
+    width: 50%;
+    border-radius: 0.5rem;
+    height: 10rem;
+    box-shadow: 5px 5px 20px black;
+    object-fit: cover;
+    filter: invert();
+}
