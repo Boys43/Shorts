@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F - Studnets - meme Fake Calculator | Nouman.Dev</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 1px solid #ccc;
+            width: 400px;
+            padding: 10px;
+            gap: 5px;
+        }
+        input, select, button {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        #res{
+            font-size: 20px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        #result{
+            font-size: 20px;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input type="number" placeholder="First Number" id="firstNumber" >
+        <select>
+            <option value="add">+</option>
+            <option value="sub">-</option>
+            <option value="mul">*</option>
+            <option value="div">/</option>
+        </select>
+        <input type="number" placeholder="Second Number" id="secondNumber" >
+        <button onclick="calculate()" type="submit">Calculate</button>
+        <div id="res">Result: <span id="result"></span></div>
+    </form>
+    <script>
+        function calculate() {
+            const result = document.getElementById('result');
+            result.innerText = 'Hello World!';
+        }
+    </script>
+</body>
+</html>

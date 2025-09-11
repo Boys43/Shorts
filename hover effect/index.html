@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hover Effect | Noumand Dev</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        padding-top: 5rem;
+        height: 100vh;
+        background-color: orange;
+      }
+
+      .noumandev-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        width: 500px;
+      }
+
+      .noumandev-gallery img {
+        width: 70px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        flex: 1;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+      }
+
+      .noumandev-gallery img:hover {
+        width: 200px;
+        z-index: 2;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="noumandev-gallery">
+      <img src="https://picsum.photos/600/400?random=1" alt="Random 1" />
+      <img src="https://picsum.photos/600/400?random=2" alt="Random 2" />
+      <img src="https://picsum.photos/600/400?random=3" alt="Random 3" />
+      <img src="https://picsum.photos/600/400?random=4" alt="Random 4" />
+      <img src="https://picsum.photos/600/400?random=4" alt="Random 4" />
+      <img src="https://picsum.photos/600/400?random=5" alt="Random 5" />
+    </div>
+  </body>
+</html>
