@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Button Inside Container</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    .app-container {
+      width: 500px;
+      max-width: 90%;
+      padding: 40px 20px;
+      border-radius: 12px;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 40px;
+    }
+
+    .btn-container {
+      width: 100%;
+      height: 80px;
+      position: relative;
+    }
+
+    .btn {
+      padding: 5px 20px;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      position: absolute;
+    }
+
+    #yesBtn {
+      background: #28a745;
+      color: white;
+      left: 30%;
+    }
+
+    #noBtn {
+      background: #dc3545;
+      color: white;
+      left: 60%;
+      transition: left 0.3s ease; /* smooth move */
+    }
+
+    /* Popup Overlay */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(5px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .popup.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 25px 35px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      animation: scaleIn 0.3s ease;
+      max-width: 400px;
+    }
+
+    .popup-content h2 {
+      margin: 0 0 15px;
+    }
+
+    .popup-content button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <h3>Do you like this project? 😏</h3>
+    <div class="btn-container">
+      <button id="yesBtn" class="btn">Yes</button>
+      <button id="noBtn" class="btn">No</button>
+    </div>
+  </div>
+
+  <!-- Popup -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <h2 id="popupText">Hello!</h2>
+      <button onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const popup = document.getElementById("popup");
+    const popupText = document.getElementById("popupText");
+    const container = document.querySelector(".btn-container");
+
+    container.addEventListener("mousemove", (e) => {
+      const rect = noBtn.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const mouseX = e.clientX;
+      const offset = 60; // how close before moving
+
+      if (mouseX > rect.left - offset && mouseX < rect.right + offset) {
+        let newLeft = rect.left + (mouseX < rect.left ? 80 : -80);
+
+        // Clamp inside container
+        const minLeft = containerRect.left + 10;
+        const maxLeft = containerRect.right - rect.width - 10;
+        if (newLeft < minLeft) newLeft = minLeft;
+        if (newLeft > maxLeft) newLeft = maxLeft;
+
+        noBtn.style.left = newLeft - containerRect.left + "px";
+      }
+    });
+
+    yesBtn.addEventListener("click", () => {
+      popupText.innerText = "🎉 Yay! Thanks for saying YES!";
+      popup.classList.add("show");
+    });
+
+    noBtn.addEventListener("click", () => {
+      popupText.innerText = "😱 You actually caught me!";
+      popup.classList.add("show");
+    });
+
+    function closePopup() {
+      popup.classList.remove("show");
+    }
+  </script>
+</body>
+</html>
