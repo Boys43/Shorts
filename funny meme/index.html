@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Funny String Calculator 🤡</title>
+  <style>
+    /* Global styling */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    /* Calculator container */
+    #calculator {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      text-align: center;
+      width: 260px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Display */
+    #display {
+      width: 90%;
+      height: 50px;
+      font-size: 22px;
+      text-align: right;
+      padding: 10px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.3);
+      color: #fff;
+      margin-bottom: 15px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    /* Buttons grid */
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    /* Buttons */
+    button {
+      height: 55px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-weight: bold;
+      transition: all 0.2s ease-in-out;
+    }
+
+    button:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    /* Special buttons */
+    .equal {
+      background: #00c853;
+    }
+
+    .equal:hover {
+      background: #00e676;
+    }
+
+    .clear {
+      background: #d50000;
+    }
+
+    .clear:hover {
+      background: #ff1744;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div id="calculator">
+    <input type="text" id="display" readonly />
+    <div class="buttons">
+      <button onclick="appendToDisplay('1')">1</button>
+      <button onclick="appendToDisplay('2')">2</button>
+      <button onclick="appendToDisplay('3')">3</button>
+      <button onclick="appendToDisplay('+')">+</button>
+
+      <button onclick="appendToDisplay('4')">4</button>
+      <button onclick="appendToDisplay('5')">5</button>
+      <button onclick="appendToDisplay('6')">6</button>
+      <button onclick="appendToDisplay('-')">-</button>
+
+      <button onclick="appendToDisplay('7')">7</button>
+      <button onclick="appendToDisplay('8')">8</button>
+      <button onclick="appendToDisplay('9')">9</button>
+      <button onclick="appendToDisplay('*')">*</button>
+
+      <button onclick="appendToDisplay('0')">0</button>
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button onclick="appendToDisplay('/')">/</button>
+      <button class="equal" onclick="calculateResult()">=</button>
+    </div>
+  </div>
+
+  <script>
+    let display = document.getElementById('display');
+    let currentExpression = '';
+
+    function appendToDisplay(value) {
+      currentExpression += value;
+      display.value = currentExpression;
+    }
+
+    function clearDisplay() {
+      currentExpression = '';
+      display.value = '';
+    }
+
+    function calculateResult() {
+      const parts = currentExpression.split(/[\+\-\*\/]/);
+      let result = parts.join('');  // concatenate as string
+      display.value = currentExpression + '=' + result;
+      currentExpression = '';
+    }
+  </script>
+</body>
+</html>
