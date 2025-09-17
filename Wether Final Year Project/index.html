@@ -3,70 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meme Final Year Project</title>
+  <title>Meme Weather Predictor</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Comic Sans MS", cursive, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      background: #f5f5f5;
+      margin: 0;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
     }
+
     .box {
-      padding: 20px;
+      padding: 25px;
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
       text-align: center;
-      width: 300px;
+      width: 350px;
+      animation: float 3s infinite ease-in-out;
     }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #ff5722;
+      font-size: 24px;
+    }
+
     input {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+      width: calc(100% - 22px);
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: 2px solid #ff9800;
+      outline: none;
+      transition: 0.3s;
     }
+    input:focus {
+      border-color: #ff5722;
+      box-shadow: 0 0 10px #ffcc80;
+    }
+
     button {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       border: none;
-      border-radius: 5px;
-      background: #007bff;
+      border-radius: 8px;
+      background: #ff5722;
       color: white;
       font-weight: bold;
+      font-size: 16px;
       cursor: pointer;
+      transition: 0.3s;
     }
     button:hover {
-      background: #0056b3;
+      background: #e64a19;
+      transform: scale(1.05);
     }
+
     .progress {
       width: 100%;
-      background: #e0e0e0;
-      border-radius: 5px;
+      background: #f0f0f0;
+      border-radius: 10px;
       overflow: hidden;
       margin-top: 15px;
-      height: 25px;
+      height: 28px;
       display: none;
     }
     .progress-bar {
       height: 100%;
       width: 0;
-      background: #28a745;
+      background: linear-gradient(90deg, #ff9800, #ff5722);
       color: white;
       text-align: center;
-      line-height: 25px;
-      transition: width 0.3s;
+      line-height: 28px;
+      font-weight: bold;
+      transition: width 0.4s;
     }
+
     .status {
-      margin-top: 10px;
+      margin-top: 12px;
       font-style: italic;
+      color: #555;
       display: none;
     }
 
-    /* Popup styles */
+    /* Popup */
     .popup {
       position: fixed;
       top: 0; left: 0;
@@ -74,34 +103,36 @@
       display: none;
       justify-content: center;
       align-items: center;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.6);
     }
+
     .popup-content {
       background: white;
-      padding: 20px 30px;
-      border-radius: 10px;
+      padding: 25px 35px;
+      border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.3);
       text-align: center;
-      animation: fadeIn 0.3s ease-in-out;
+      animation: bounceIn 0.5s ease;
     }
+
     .popup-content h3 {
       margin: 0 0 10px;
+      font-size: 22px;
+      color: #ff5722;
     }
+
     .popup button {
-      margin-top: 10px;
-      background: #28a745;
+      margin-top: 12px;
+      background: #4caf50;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
+
   </style>
 </head>
 <body>
   <div class="box">
-    <h2>Weather Predictor 🌦️</h2>
-    <input type="text" id="location" placeholder="Enter your location" autocomplete="off" />
-    <button onclick="startProcess()">Search</button>
+    <h2> Weather Predictor 🌦️</h2>
+    <input type="text" id="location" placeholder="Type your city..." autocomplete="off" />
+    <button onclick="startProcess()">Predict Weather</button>
     <div class="progress">
       <div class="progress-bar" id="progressBar">0%</div>
     </div>
@@ -111,24 +142,24 @@
   <!-- Popup -->
   <div class="popup" id="popup">
     <div class="popup-content">
-      <h3>🌤️ Just look outside!</h3>
+      <h3>🌤️ Bro, just look outside! You lazy</h3>
       <button onclick="closePopup()">OK</button>
     </div>
   </div>
 
   <script>
     const statuses = [
-      "Working...",
-      "Connecting with the servers...",
-      "Gathering data...",
-      "Checking clouds...",
-      "Finalizing results..."
+      "Contacting NASA satellites 🚀...",
+      "Hacking the clouds ☁️...",
+      "Counting raindrops 💧...",
+      "Asking the birds 🐦...",
+      "Almost done... 👀"
     ];
 
     function startProcess() {
       const loc = document.getElementById("location").value.trim();
       if (!loc) {
-        alert("Please enter your location!");
+        alert("Please enter your city first! 😅");
         return;
       }
 
@@ -141,7 +172,6 @@
       const statusText = document.getElementById("status");
 
       const interval = setInterval(() => {
-        // Random increment between 5 and 20
         let increment = Math.floor(Math.random() * 16) + 5;
         progress = Math.min(progress + increment, 100);
 
@@ -157,7 +187,7 @@
           clearInterval(interval);
           setTimeout(() => {
             showPopup();
-          }, 500);
+          }, 700);
         }
       }, 1000);
     }
