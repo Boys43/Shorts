@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Your Crush Simulator 💔</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 600px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            color: #fff;
+            padding: 15px;
+            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .msg {
+            padding: 12px 15px;
+            border-radius: 12px;
+            max-width: 75%;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .bot {
+            background: #f1f1f1;
+            align-self: flex-start;
+        }
+
+        .final {
+            background: #ff416c;
+            color: #fff;
+            font-weight: bold;
+            align-self: center;
+            text-align: center;
+        }
+
+        .input-area {
+            display: flex;
+            padding: 15px;
+            gap: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .input-area label {
+            flex: 1;
+            font-size: 15px;
+
+            font-weight: 700;
+            padding-left: 10px;
+        }
+
+        input {
+            flex: 1;
+            border: none;
+            padding: 12px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        button {
+            background: #ff416c;
+            border-radius: 12px;
+            border: none;
+            color: #fff;
+            padding: 6px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff4b2b;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">💬 Text Your Crush Simulator</div>
+        <div class="messages" id="messages"></div>
+        <div class="input-area">
+            <div>
+                <label for="Name">Your Name 😗:</label>
+                <input type="text" id="Name" autocomplete="off" placeholder="Enter Your name..." />
+            </div>
+            <div>
+                <label for="crushName">Crush Name 💘:</label>
+                <input type="text" id="crushName" autocomplete="off" placeholder="Enter crush name..." />
+            </div>
+            <button onclick="startSimulation()">Search</button>
+        </div>
+    </div>
+
+    <script>
+        const statuses = [
+            "Sending Message.. 😀",
+            "Typing… deleted… typing… deleted… BLOCKED ❌",
+            "Crush is online but replying to 'bestie' 💀",
+            "Delivered to the FBI 🌌",
+            "Expected reply: 2 min → Actual: 2 years ⏳",
+            "Oops! I sent your text to the group chat 👀",
+            "Status: 'Single' → but not for you 💔",
+            "Almost Done... 😅",
+        ];
+
+        function startSimulation() {
+            const Name = document.getElementById("Name").value.trim();
+            const messages = document.getElementById("messages");
+            messages.innerHTML = "";
+
+            if (!crushName) return;
+
+            let step = 0;
+
+            function showStatus() {
+                if (step < statuses.length) {
+                    const msg = document.createElement("div");
+                    msg.className = "msg bot";
+                    msg.textContent = statuses[step];
+                    messages.appendChild(msg);
+                    messages.scrollTop = messages.scrollHeight;
+                    step++;
+                    setTimeout(showStatus, 1200);
+                } else {
+                    setTimeout(() => {
+                        const finalMsg1 = document.createElement("div");
+                        finalMsg1.className = "msg final";
+                        finalMsg1.textContent = `Error 404: Enough ${Name} Do 20 PushUps 😠 `;
+                        messages.appendChild(finalMsg1);
+
+                        messages.scrollTop = messages.scrollHeight;
+                    }, 1500);
+                }
+            }
+
+            showStatus();
+        }
+    </script>
+</body>
+
+</html>
