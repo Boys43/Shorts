@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Girlfriend 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            position: relative;
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 420px;
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 22px;
+            color: #ff82c9;
+        }
+
+        #chatbox {
+            height: 350px;
+            overflow-y: auto;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 12px;
+            background: rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+
+        .bubble {
+            max-width: 75%;
+            padding: 10px 14px;
+            margin: 6px 0;
+            border-radius: 15px;
+            display: inline-block;
+            word-wrap: break-word;
+            animation: pop 0.2s ease;
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .user {
+            text-align: right;
+        }
+
+        .user .bubble {
+            background: #7cdcff;
+            color: #000;
+            border-bottom-right-radius: 3px;
+        }
+
+        .bot {
+            text-align: left;
+        }
+
+        .bot .bubble {
+            background: #ff91d6;
+            color: #000;
+            border-bottom-left-radius: 3px;
+        }
+
+        /* Status inside chatbox */
+        .status {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 13px;
+            color: #fff;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .input-box {
+            display: flex;
+            gap: 10px;
+        }
+        
+        input {
+            border: 1px solid #ccc;
+            flex: 1;
+            padding: 10px;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 14px;
+            background: #ff4d6d;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #ff2d5d;
+        }
+
+        /* Typing dots animation */
+        .typing {
+            display: inline-block;
+        }
+
+        .typing span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            margin: 0 2px;
+            background: #000;
+            border-radius: 50%;
+            animation: blink 1.4s infinite both;
+        }
+
+        .typing span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes blink {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        footer{
+            position: absolute;
+            bottom: 0;
+            padding: 12px ;
+            text-align: center;
+            color: black;
+            
+        }
+
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>💖 AI Girlfriend 💖</h1>
+        <div id="chatbox">
+            <div id="status" class="status"></div>
+        </div>
+        <div class="input-box">
+            <input type="text" id="userInput" placeholder="Type something...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <footer>
+        All Rights Reserved &copy; 2025 | <a href="https://www.youtube.com/@noumandev-q5p" target="_blank">Nouman Dev</a>
+    </footer>
+
+    <script>
+        const chatbox = document.getElementById('chatbox');
+        const userInput = document.getElementById('userInput');
+        const statusBox = document.getElementById('status');
+
+        const funnyStatuses = [
+            "Analyzing your rizz 😏...",
+            "Consulting Andrew Tate 💪...",
+            "Hacking NASA for pickup lines 🚀...",
+            "Asking Elon for advice 🤖...",
+            "Calculating love percentage ❤️...",
+            "Adding more bugs (just kidding) 🐛...",
+            "Pretending to care 🥲..."
+        ];
+
+        function addMessage(sender, text, typing = false) {
+            const wrapper = document.createElement("div");
+            wrapper.classList.add(sender);
+
+            if (typing) {
+                wrapper.innerHTML = `<div class="bubble"><span class="typing"><span></span><span></span><span></span></span></div>`;
+            } else {
+                wrapper.innerHTML = `<div class="bubble">${text}</div>`;
+            }
+
+            chatbox.insertBefore(wrapper, statusBox);
+            chatbox.scrollTop = chatbox.scrollHeight;
+            return wrapper;
+        }
+
+        function sendMessage() {
+            const text = userInput.value.trim();
+            if (text === '') return;
+
+            // Show user message
+            addMessage("user", text);
+            userInput.value = '';
+
+            // Start statuses
+            let i = 0;
+            statusBox.innerText = funnyStatuses[i];
+            let interval = setInterval(() => {
+                i++;
+                if (i < funnyStatuses.length) {
+                    statusBox.innerText = funnyStatuses[i];
+                }
+            }, 1200);
+
+            // Show typing bubble
+            const typingBubble = addMessage("bot", "", true);
+
+            // After delay show final message
+            setTimeout(() => {
+                clearInterval(interval);
+                statusBox.innerText = "";
+                typingBubble.remove();
+                addMessage("bot", "Stay hard man! 💪🔥");
+            }, 5000);
+        }
+
+        userInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+
+</html>
